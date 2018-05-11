@@ -30,5 +30,17 @@ public class KamuRollable {
 	{
 		quantity++;
 	}
-	
+
+	public String getString()
+	{
+		String toReturn = "Szerintem van " + String.valueOf(this.quantity) + "db ";
+		if (rollNumber == 1) toReturn += "egyes";
+		else if (rollNumber == 2) toReturn += "kettes";
+		else if (rollNumber == 3) toReturn += "hármas";
+		else if (rollNumber == 4) toReturn += "négyes";
+		else if (rollNumber == 5) toReturn += "ötös";
+		else if (rollNumber == 6) toReturn += "hatos";
+		toReturn += ".";
+		return toReturn;
+	}
 }

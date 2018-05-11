@@ -239,15 +239,6 @@
                 android:layout_centerHorizontal="true"
                 android:id="@+id/txtPlayerName"
                 />
-            <TextView
-                android:text="Pontok"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAlignment="center"
-                android:layout_centerHorizontal="true"
-                android:id="@+id/txtPlayerPoints"
-
-                />
         </LinearLayout>
         <FrameLayout
             android:layout_width="0dp"

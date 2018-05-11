@@ -4,9 +4,34 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class KamuPlayer {
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	private String name;
 	private KamuUIInterface ui;
-	private ArrayList<Integer> dice = new ArrayList<Integer>();
+
+	public void setGc(KamuGameController gc) {
+		this.gc = gc;
+	}
+
+	private KamuGameController gc;
+
+
+	public boolean isEliminated() {
+		return eliminated;
+	}
+
+	public void setEliminated(boolean eliminated) {
+		this.eliminated = eliminated;
+	}
+
+	private boolean eliminated = false;
+	protected ArrayList<Integer> dice = new ArrayList<Integer>();
 	
 	public KamuPlayer(String name, KamuUIInterface ui)
 	{
@@ -38,6 +63,7 @@ public class KamuPlayer {
 		if (dice.size() == 0)
 			return true;
 		dice.remove(dice.size()-1);
+		gc.UpdateUI(this,KamuDataType.DICE, String.valueOf(getDiceSize()));
 		return dice.size() <=0;
 	}
 
@@ -54,14 +80,17 @@ public class KamuPlayer {
 			
 			
 			outData.setPreviousSaid(ui.Say());
+			gc.UpdateUI(this,KamuDataType.SAY, outData.getPreviousSaid().getString());
 			
 		}
 		else //ha nincs guggolas
 		{
 			boolean believes = ui.Believe(data.getPreviousSaid(), data.getRoll().getNumberOfDiceLeft());
-			
+
 			if (believes)
 			{
+				gc.UpdateUI(this,KamuDataType.BELIEVE, "Elhiszem.");
+
 				KamuRollable say = ui.Say();
 				while(say.getQuantity()<=data.getPreviousSaid().getQuantity()) //am�g nem mondd egy nagyobbat mint az el�z�
 				{
@@ -69,10 +98,13 @@ public class KamuPlayer {
 					say = ui.Say();
 				}
 				outData.setPreviousSaid(say);
+				gc.UpdateUI(this,KamuDataType.SAY, outData.getPreviousSaid().getString());
 			}
 			//ha nem hiszi el �s
 			else if (data.getRoll().SayIsTrue(data.getPreviousSaid())) //az el�z� igazat mondott
 			{
+				gc.UpdateUI(this,KamuDataType.BELIEVE, "Nem hiszem el.");
+				gc.UpdateUI(this,KamuDataType.MESSAGE, "Van annyi kocka.");
 				if (removeDie())
 				{
 					outData.setWinner(this);
@@ -81,7 +113,8 @@ public class KamuPlayer {
 			}
 			else //az el�z� hazudott
 			{
-				
+				gc.UpdateUI(this,KamuDataType.BELIEVE, "Nem hiszem el.");
+				gc.UpdateUI(this,KamuDataType.MESSAGE, "Nincs annyi kocka.");
 				if (data.getPreviousPlayer().removeDie())
 				{
 					outData.setWinner(data.getPreviousPlayer()); //a winner az eliminated //elbaszas
