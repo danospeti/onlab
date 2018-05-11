@@ -25,7 +25,7 @@ public void AddPenaltyPoint()
 {
 	penaltyPoints++;
 	//System.out.println(name + " b�ntet�pontot kapott, �gy pontjainak sz�ma: " + penaltyPoints);
-	gc.UpdateUI(this,DataType.MESSAGE, name + " b�ntet�pontot kapott, �gy pontjainak sz�ma: " + penaltyPoints);
+	gc.UpdateUI(this,DataType.MESSAGE, name + " büntetőpontot kapott.");
 	gc.UpdateUI(this, DataType.POINTS, String.valueOf(penaltyPoints));
 	
 }
@@ -37,7 +37,7 @@ public boolean RemovePenaltyPoint() //Returns true if won
 {
 	penaltyPoints--;
 	//System.out.println(name + " b�ntet�pontot tett vissza, �gy pontjainak sz�ma: " + penaltyPoints);
-	gc.UpdateUI(this,DataType.MESSAGE, name + " b�ntet�pontot tett vissza, �gy pontjainak sz�ma: " + penaltyPoints);
+	gc.UpdateUI(this,DataType.MESSAGE, name + " büntetőpontot tett vissza.");
 	gc.UpdateUI(this, DataType.POINTS, String.valueOf(penaltyPoints));
 	//Winner
 	if (penaltyPoints == 0)
@@ -93,9 +93,9 @@ public boolean RemovePenaltyPoint() //Returns true if won
 				if (ui instanceof BazsBotUI) 
 				{
 					if (believes)
-						gc.UpdateUI(this, DataType.MESSAGE, name + " elhiszi.");
+						gc.UpdateUI(this, DataType.BELIEVE,"Elhiszem.");
 					else
-						gc.UpdateUI(this, DataType.MESSAGE, name + " nem hiszi el.");
+						gc.UpdateUI(this, DataType.BELIEVE,"Nem hiszem el.");
 				}
 				
 				if (believes) // ha elhiszi amit az el�z� mondott
@@ -122,7 +122,7 @@ public boolean RemovePenaltyPoint() //Returns true if won
 				}	
 				else if (data.getSaidRoll().getRollNumber() == data.getRoll().getRollNumber()) //nem hiszi el, de igazat mondott
 				{
-					gc.UpdateUI(this, DataType.MESSAGE, data.getPlayer().getName() + " t�nyleg annyit dobott.");
+					gc.UpdateUI(this, DataType.MESSAGE, data.getPlayer().getName() + " tényleg annyit dobott.");
 
 					if (!gc.getPenaltyReverse()) //ha van m�g b�ntet�pont h�z�s van
 					{

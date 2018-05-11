@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TableLayout xmlns:tools="http://schemas.android.com/tools"
-    android:layout_height="match_parent"
+<TableLayout android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:background="@drawable/background"
-    tools:context="hu.danos.dicegames.BazsActivity"
-    >
+>
     <TableRow
         android:layout_width="fill_parent"
         android:layout_height="0dp"
@@ -19,24 +17,24 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-                <ImageView
-                    android:id="@+id/imgBubble3"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/right" />
+            <ImageView
+                android:id="@+id/imgBubble3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/right" />
 
-                <TextView
-                    android:id="@+id/txtBotSays_2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignLeft="@+id/imgBubble3"
-                    android:layout_alignTop="@+id/imgBubble3"
-                    android:layout_alignRight="@+id/imgBubble3"
-                    android:layout_alignBottom="@+id/imgBubble3"
-                    android:layout_margin="1dp"
-                    android:gravity="center"
-                    android:text="Hello"
-                    android:textColor="#000000" />
+            <TextView
+                android:id="@+id/txtBotSays_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/imgBubble3"
+                android:layout_alignTop="@+id/imgBubble3"
+                android:layout_alignRight="@+id/imgBubble3"
+                android:layout_alignBottom="@+id/imgBubble3"
+                android:layout_margin="1dp"
+                android:gravity="center"
+                android:text="Hello"
+                android:textColor="#000000" />
             </RelativeLayout>
         </FrameLayout>
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -102,7 +100,7 @@
     <TableRow
         android:layout_width="fill_parent"
         android:layout_height="0dp"
-        android:layout_weight="0"
+        android:layout_weight="1"
         android:weightSum="3"
         >
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -124,7 +122,7 @@
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
                 android:layout_centerHorizontal="true"
-                android:id="@+id/txtBotName_3"
+                android:id="@+id/txtBotName_2"
                 />
             <TextView
                 android:text="Pontok"
@@ -132,7 +130,7 @@
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
                 android:layout_centerHorizontal="true"
-                android:id="@+id/txtBotPoints_3"
+                android:id="@+id/txtBotPoints_2"
 
                 />
         </LinearLayout>
@@ -160,37 +158,13 @@
                 android:gravity="top"
                 />
         </LinearLayout>
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        <ImageView
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:src="@drawable/bot"
             android:layout_column="3"
             android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical">
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@drawable/bot"
-
-                />
-            <TextView
-                android:text="Bot Nev"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAlignment="center"
-                android:layout_centerHorizontal="true"
-                android:id="@+id/txtBotName_1"
-                />
-            <TextView
-                android:text="Pontok"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAlignment="center"
-                android:layout_centerHorizontal="true"
-                android:id="@+id/txtBotPoints_1"
-
-                />
-        </LinearLayout>
+            />
     </TableRow>
     <TableRow
         android:layout_width="fill_parent"
@@ -206,19 +180,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <ImageView
-                    android:id="@+id/imgBubble4"
+                    android:id="@+id/imgBubble3"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:src="@drawable/up" />
 
                 <TextView
-                    android:id="@+id/txtBotSays_3"
+                    android:id="@+id/txtBotSays_2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignLeft="@+id/imgBubble4"
-                    android:layout_alignTop="@+id/imgBubble4"
-                    android:layout_alignRight="@+id/imgBubble4"
-                    android:layout_alignBottom="@+id/imgBubble4"
+                    android:layout_alignLeft="@+id/imgBubble3"
+                    android:layout_alignTop="@+id/imgBubble3"
+                    android:layout_alignRight="@+id/imgBubble3"
+                    android:layout_alignBottom="@+id/imgBubble3"
                     android:layout_margin="1dp"
                     android:gravity="center"
                     android:text="Hello"
@@ -235,16 +209,16 @@
             <ImageView
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:src="@drawable/user"
+                android:src="@drawable/bot"
 
                 />
             <TextView
-                android:text="Nev"
+                android:text="Bot Nev"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
                 android:layout_centerHorizontal="true"
-                android:id="@+id/txtPlayerName"
+                android:id="@+id/txtBotName_2"
                 />
             <TextView
                 android:text="Pontok"
@@ -252,7 +226,7 @@
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
                 android:layout_centerHorizontal="true"
-                android:id="@+id/txtPlayerPoints"
+                android:id="@+id/txtBotPoints_2"
 
                 />
         </LinearLayout>
@@ -265,19 +239,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <ImageView
-                    android:id="@+id/imgBubble1"
+                    android:id="@+id/imgBubble2"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:src="@drawable/left" />
 
                 <TextView
-                    android:id="@+id/txtPlayerSays"
+                    android:id="@+id/txtBotSays_1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignLeft="@+id/imgBubble1"
-                    android:layout_alignTop="@+id/imgBubble1"
-                    android:layout_alignRight="@+id/imgBubble1"
-                    android:layout_alignBottom="@+id/imgBubble1"
+                    android:layout_alignLeft="@+id/imgBubble2"
+                    android:layout_alignTop="@+id/imgBubble2"
+                    android:layout_alignRight="@+id/imgBubble2"
+                    android:layout_alignBottom="@+id/imgBubble2"
                     android:layout_margin="1dp"
                     android:gravity="center"
                     android:text="Hello"
@@ -292,125 +266,36 @@
         android:layout_weight="0"
         >
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
             android:id="@+id/txtMessage"
             android:textSize="16sp"
             android:text="Ezt mondja a program"
-            android:layout_column="1"
-            android:layout_weight="3"
-            android:layout_span="3"
+        android:layout_column="1"
+        android:layout_weight="3"
+        android:layout_span="3"
             android:gravity="center"
-            />
+        />
     </TableRow>
     <TableRow
         android:layout_width="fill_parent"
         android:layout_height="0dp"
-        android:layout_weight="0"
+        android:layout_weight="0.7"
         android:weightSum="3"
         >
-
-        <LinearLayout
+        <ImageView
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:src="@drawable/bot"
             android:layout_column="1"
-            android:layout_gravity="center_vertical"
             android:layout_weight="1"
-            android:orientation="vertical"
-            android:src="@drawable/bot">
-
-            <Button
-                android:id="@+id/btnBelieve"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:text="Elhiszem"
-                android:textSize="12sp"
-                android:layout_gravity="bottom"
-                android:layout_marginTop="55dp"/>
-
-            <Button
-                android:id="@+id/btnDontBelieve"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:text="Kamu"
-                android:textSize="12sp"
-                android:layout_gravity="bottom"
-                />
-        </LinearLayout>
-        <LinearLayout
+            />
+        <ImageView
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:src="@drawable/bot"
             android:layout_column="2"
-            android:layout_gravity="center_vertical"
             android:layout_weight="2"
-            android:orientation="vertical"
-            android:src="@drawable/bot">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:id="@+id/imgDie_1"
-                    android:layout_width="45dp"
-                    android:layout_height="45dp"
-                    android:layout_gravity="center"
-                    android:layout_margin="8dp"
-                    android:padding="0dp"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/dice1" />
-
-                <ImageView
-                    android:id="@+id/imgDie_2"
-                    android:layout_width="45dp"
-                    android:layout_height="45dp"
-                    android:layout_gravity="center"
-                    android:layout_margin="8dp"
-                    android:padding="0dp"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/dice1" />
-            </LinearLayout>
-
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Dobás"
-                android:textSize="12sp"
-                android:id="@+id/btnRoll"
-
-                />
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_weight="0.5"
-                android:gravity="center">
-                <Spinner
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.75"
-                    android:id="@+id/spinDie_1"
-                    />
-                <Spinner
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.75"
-                    android:id="@+id/spinDie_2"
-                    />
-            </LinearLayout>
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Mond"
-                android:textSize="12sp"
-                android:id="@+id/btnSay"
-                />
-
-        </LinearLayout>
+            />
     </TableRow>
 </TableLayout>

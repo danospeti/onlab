@@ -1,6 +1,7 @@
 package Engine.Bazs;
 import java.util.ArrayList;
 
+import hu.danos.dicegames.Bazs.BazsUpdate;
 import hu.danos.dicegames.BazsActivity;
 
 public class BazsGameController {
@@ -9,7 +10,7 @@ private int penaltyPoints;
 private boolean penaltyReverse = false;
 private BazsPlayer winner = null;
     private BazsActivity activity;
-	private ArrayList<String> uIUpdates;
+	private ArrayList<BazsUpdate> uIUpdates;
 
 //Player, bot1, bot2, bot3
 
@@ -22,7 +23,7 @@ public BazsGameController(ArrayList<BazsPlayer> inPlayers, int pPoints, BazsActi
 		{
 			player.setGC(this);
 		}
-		uIUpdates = new ArrayList<String>();
+		uIUpdates = new ArrayList<BazsUpdate>();
 	}
 public BazsActivity getActivity()
 {
@@ -96,6 +97,7 @@ public void RemovePenaltyPoint()
 		// kimenet type:msg
 		//types: msg, botXsay, botXpts, tpts
 		//TODO playerpoints updateelése
+		/*
 		String toAdd = "";
 		if (type == DataType.MESSAGE)
 		{
@@ -118,20 +120,82 @@ public void RemovePenaltyPoint()
 		{
 			toAdd+="tpts";
 		}
+
 		toAdd +=":";
 		toAdd +=msg;
 		uIUpdates.add(toAdd);
+		*/
+		BazsUpdate update = new BazsUpdate();
+		BazsUpdate update2 = null;
+		if (type == DataType.MESSAGE)
+		{
+			update.setType(UIDataType.MESSAGE);
+			update.setWait(false);
+			update.setValue(msg);
+			update2 = new BazsUpdate(true, UIDataType.MESSAGE, "delete");
+		}
+		if (type == DataType.SAY)
+		{
+			update.setWait(false);
+			update.setValue(msg);
+			if (players.indexOf(p) == 1)
+				update.setType(UIDataType.BOT1SAYS);
+			else if (players.indexOf(p) == 2)
+				update.setType(UIDataType.BOT2SAYS);
+			else if (players.indexOf(p) == 3)
+				update.setType(UIDataType.BOT3SAYS);
+			if (players.indexOf(p) != 3)
+				update2 = new BazsUpdate(true, update.getType(), "delete");
+
+		}
+		if (type == DataType.POINTS)
+		{
+			update.setWait(false);
+			update.setValue(msg);
+			if (players.indexOf(p) == 1)
+				update.setType(UIDataType.BOT1POINTS);
+			else if (players.indexOf(p) == 2)
+				update.setType(UIDataType.BOT2POINTS);
+			else if (players.indexOf(p) == 3)
+				update.setType(UIDataType.BOT3POINTS);
+            else if (players.indexOf(p) == 0)
+                update.setType(UIDataType.PLAYERPOINTS);
+		}
+		if (type == DataType.TABLEPOINTS)
+		{
+			update.setWait(false);
+			update.setValue(msg);
+			update.setType(UIDataType.TABLEPOINTS);
+
+		}
+		if (type == DataType.BELIEVE)
+		{
+			update.setWait(false);
+			update.setValue(msg);
+			if (players.indexOf(p) == 1)
+				update.setType(UIDataType.BOT1BELIEVES);
+			else if (players.indexOf(p) == 2)
+				update.setType(UIDataType.BOT2BELIEVES);
+			else if (players.indexOf(p) == 3)
+				update.setType(UIDataType.BOT3BELIEVES);
+			update2 = new BazsUpdate(true, update.getType(), "delete");
+		}
+		uIUpdates.add(update);
+		if (update2 != null)
+			uIUpdates.add(update2);
 	}
-	public ArrayList<String> getUIUpdates()
+	public ArrayList<BazsUpdate> getUIUpdates()
 	{
-		return uIUpdates;
-	}
-	public void clearUiUpdates()
-	{
+		ArrayList<BazsUpdate> temp = (ArrayList<BazsUpdate>) uIUpdates.clone();
 		uIUpdates.clear();
+		return temp;
 	}
 	public BazsPlayer getPlayerAndroid()
     {
         return players.get(0);
     }
+    public int getIndexOfPlayer(BazsPlayer p)
+	{
+		return players.indexOf(p);
+	}
 }

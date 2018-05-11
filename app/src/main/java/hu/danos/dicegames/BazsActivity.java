@@ -20,6 +20,8 @@ import Engine.Bazs.BazsPlayer;
 import Engine.Bazs.BazsPlayerAndroid;
 import Engine.Bazs.BazsRollable;
 import Engine.Bazs.BazsTurnData;
+import Engine.Bazs.UIDataType;
+import hu.danos.dicegames.Bazs.BazsUpdate;
 import hu.danos.dicegames.Bazs.TurnStage;
 
 public class BazsActivity extends AppCompatActivity {
@@ -34,9 +36,10 @@ public class BazsActivity extends AppCompatActivity {
     private TextView txtBotSays_1;
     private TextView txtBotSays_2;
     private TextView txtBotSays_3;
+    private TextView txtPlayerSays;
     private TextView txtPlayerPoints;
     private TextView txtMessage;
-
+    private TextView txtPlayerName;
 
     private Button btnBelieve;
     private Button btnDontBelieve;
@@ -45,13 +48,17 @@ public class BazsActivity extends AppCompatActivity {
 
     private ImageView imgDie_1;
     private ImageView imgDie_2;
-
+    private ImageView imgBubble1;
+    private ImageView imgBubble2;
+    private ImageView imgBubble3;
+    private ImageView imgBubble4;
     private Spinner spinDie_1;
     private Spinner spinDie_2;
 
     private BazsGameController gc;
     private BazsPlayerAndroid player;
     private BazsDice dice;
+    private int roundNumber;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,9 +74,10 @@ public class BazsActivity extends AppCompatActivity {
         txtBotSays_1= (TextView) findViewById(R.id.txtBotSays_1);
         txtBotSays_2= (TextView) findViewById(R.id.txtBotSays_2);
         txtBotSays_3= (TextView) findViewById(R.id.txtBotSays_3);
+        txtPlayerSays= (TextView) findViewById(R.id.txtPlayerSays);
         txtPlayerPoints= (TextView) findViewById(R.id.txtPlayerPoints);
         txtMessage= (TextView) findViewById(R.id.txtMessage);
-
+        txtPlayerName = (TextView) findViewById(R.id.txtPlayerName);
 
 
         btnDontBelieve = (Button) findViewById(R.id.btnDontBelieve);
@@ -79,6 +87,13 @@ public class BazsActivity extends AppCompatActivity {
 
         imgDie_1 = (ImageView) findViewById(R.id.imgDie_1);
         imgDie_2 = (ImageView) findViewById(R.id.imgDie_2);
+        imgBubble1 = (ImageView) findViewById(R.id.imgBubble1);
+        imgBubble2 = (ImageView) findViewById(R.id.imgBubble2);
+        imgBubble3 = (ImageView) findViewById(R.id.imgBubble3);
+        imgBubble4 = (ImageView) findViewById(R.id.imgBubble4);
+
+
+
 
         spinDie_1 = (Spinner) findViewById(R.id.spinDie_1);
         spinDie_2 = (Spinner) findViewById(R.id.spinDie_2);
@@ -96,6 +111,8 @@ public class BazsActivity extends AppCompatActivity {
             @Override
             public void onClick(final View view) {
                 setTurnStage(TurnStage.ROLL);
+                new SleepThenWrite2().execute(new BazsUpdate(false,UIDataType.PLAYERBELIEVES, "Nem hiszem el."));
+                new SleepThenWrite2().execute(new BazsUpdate(false,UIDataType.PLAYERBELIEVES, "delete"));
             }
         });
 
@@ -104,7 +121,9 @@ public class BazsActivity extends AppCompatActivity {
             public void onClick(final View view) {
                 if (player.getData().getRoll().getRollNumber() == player.getData().getSaidRoll().getRollNumber())
                 {
-                    new SleepThenWrite().execute("msg: " + player.getData().getPlayer().getName() + "Igazat mondott");
+                    //new SleepThenWrite().execute("msg: " + player.getData().getPlayer().getName() + "Igazat mondott");
+                    new SleepThenWrite2().execute(new BazsUpdate(false,UIDataType.MESSAGE, player.getData().getPlayer().getName() + " igazat mondott."));
+                    new SleepThenWrite2().execute(new BazsUpdate(true,UIDataType.MESSAGE, "delete"));
                     if (!gc.getPenaltyReverse()) //ha van m�g b�ntet�pont h�z�s van
                     {
                         player.AddPenaltyPoint();
@@ -120,11 +139,12 @@ public class BazsActivity extends AppCompatActivity {
                             */
                         gc.AddPenaltyPoint();
                     }
-
                 }
                 else
                 {
-                    new SleepThenWrite().execute("msg: " + player.getData().getPlayer().getName() + " hazudott");
+                    //new SleepThenWrite().execute("msg: " + player.getData().getPlayer().getName() + " hazudott");
+                    new SleepThenWrite2().execute(new BazsUpdate(false,UIDataType.MESSAGE, player.getData().getPlayer().getName() + " hazudott."));
+                    new SleepThenWrite2().execute(new BazsUpdate(true,UIDataType.MESSAGE, "delete"));
                     if (!gc.getPenaltyReverse()) //ha van m�g b�ntet�pont h�z�s van
                     {
                         player.getData().getPlayer().AddPenaltyPoint();
@@ -141,7 +161,10 @@ public class BazsActivity extends AppCompatActivity {
                     }
                 }
                 player.getData().setGuggolas(true);
-                new SleepThenWrite().execute("setTurnState:ROLL");
+                //new SleepThenWrite().execute("setTurnState:ROLL");
+                new SleepThenWrite2().execute(new BazsUpdate(false,UIDataType.PLAYERBELIEVES, "Nem hiszem el."));
+                new SleepThenWrite2().execute(new BazsUpdate(false,UIDataType.PLAYERBELIEVES, "delete"));
+                new SleepThenWrite2().execute(new BazsUpdate(true,UIDataType.STATE_ROLL, ""));
             }
         });
 
@@ -233,6 +256,13 @@ public class BazsActivity extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+    }
+
     private void EndTurn()
     {
         if (player.getOutData().getWinner() != null)
@@ -243,28 +273,28 @@ public class BazsActivity extends AppCompatActivity {
         {
             player.getOutData().setPlayer(player);
             setTurnStage(TurnStage.WAIT);
-            player.setData(gc.PlayARound(player.getOutData())); //egy botkör lemegy
+            player.setData(gc.PlayARound(player.getOutData()));//egy botkör lemegy
             PlayUIUpdates();
+            new SleepThenWrite2().execute(new BazsUpdate(false, UIDataType.ROUND, String.valueOf(++roundNumber)));
             if (player.getData().getGuggolas())
             {
-                new SleepThenWrite().execute("setTurnState:ROLL");
-
+                //new SleepThenWrite().execute("setTurnState:ROLL");
+                new SleepThenWrite2().execute(new BazsUpdate(true,UIDataType.STATE_ROLL, ""));
             }
             else
             {
                 //TODO if 21
                 if (player.getData().getRoll().getRollNumber() == 21)
                 {
-                    new SleepThenWrite().execute("setTurnState:ROLL");
-
+                    //new SleepThenWrite().execute("setTurnState:ROLL");
+                    new SleepThenWrite2().execute(new BazsUpdate(true,UIDataType.STATE_ROLL, ""));
                 }
                 else
                 {
-                    new SleepThenWrite().execute("setTurnState:BELIEVE");
-
+                    //new SleepThenWrite().execute("setTurnState:BELIEVE");
+                    new SleepThenWrite2().execute(new BazsUpdate(true,UIDataType.STATE_BELIEVE, ""));
                 }
             }
-            //TODO data kielemzés turnstage választás
         }
     }
     private void InitializeGameController()
@@ -287,14 +317,26 @@ public class BazsActivity extends AppCompatActivity {
         int tablepoints = 10;
         gc = new BazsGameController(players, tablepoints, this);
 
+        roundNumber = 1;
         txtBotName_1.setText(bot.getName());
         txtBotName_2.setText(bot2.getName());
         txtBotName_3.setText(bot3.getName());
+        txtPlayerName.setText(jatekos.getName());
         txtBotPoints_1.setText( "0 pont");
         txtBotPoints_2.setText( "0 pont");
         txtBotPoints_3.setText( "0 pont");
         txtPlayerPoints.setText( "0 pont");
-        txtTablePoints.setText(String.valueOf(tablepoints) + " pontok");
+        txtTablePoints.setText(String.valueOf(tablepoints) + " pont");
+
+        txtPlayerSays.setText("");
+        txtBotSays_1.setText("");
+        txtBotSays_2.setText("");
+        txtBotSays_3.setText("");
+
+        imgBubble1.setImageAlpha(0);
+        imgBubble2.setImageAlpha(0);
+        imgBubble3.setImageAlpha(0);
+        imgBubble4.setImageAlpha(0);
 
         this.player = (BazsPlayerAndroid) gc.getPlayerAndroid();
 
@@ -351,15 +393,13 @@ public class BazsActivity extends AppCompatActivity {
 
     private void PlayUIUpdates()
     {
-        ArrayList<String> updates = gc.getUIUpdates();
-
-        for (String update:updates)
+        ArrayList<BazsUpdate> updates = gc.getUIUpdates();
+        for (BazsUpdate update:updates)
         {
             //először minden marad és minden előtt van delay
-            //TODO eltűnés+delay
             //if (update.startsWith("msg")) {}
-            new SleepThenWrite().execute(update);
-            System.out.println(update);
+            new SleepThenWrite2().execute(update);
+            //System.out.println(update);
         }
     }
     private class SleepThenWrite extends AsyncTask<String, Void, String> {
@@ -440,6 +480,222 @@ public class BazsActivity extends AppCompatActivity {
                 }
 
             }
+        }
+
+    }
+
+    private class SleepThenWrite2 extends AsyncTask<BazsUpdate, Void, BazsUpdate> {
+        private TextView txt;
+        private ImageView img;
+        @Override
+        protected BazsUpdate doInBackground(BazsUpdate... params) {
+            if (params[0].isWait()) {
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            return params[0];
+        }
+        protected void onPostExecute(BazsUpdate update) {
+            if (update.getType().equals(UIDataType.MESSAGE))
+            {
+                txt = (TextView) findViewById(R.id.txtMessage);
+                if (update.getValue().equals("delete"))
+                {
+                    txt.setText("");
+                }
+                else
+                {
+                    txt.setText(update.getValue());
+                }
+            }
+            else if (update.getType().equals(UIDataType.BOT1SAYS))
+            {
+                txt = (TextView) findViewById(R.id.txtBotSays_1);
+                img = (ImageView) findViewById(R.id.imgBubble2);
+                if (update.getValue().equals("delete"))
+                {
+                    txt.setText("");
+                    img.setImageAlpha(0);
+
+                }
+                else
+                {
+                    txt.setText(update.getValue());
+                    img.setImageResource(R.drawable.down);
+                    img.setImageAlpha(255);
+                }
+            }
+            else if (update.getType().equals(UIDataType.BOT2SAYS))
+            {
+                txt = (TextView) findViewById(R.id.txtBotSays_2);
+                img = (ImageView) findViewById(R.id.imgBubble3);
+                if (update.getValue().equals("delete"))
+                {
+                    txt.setText("");
+                    img.setImageAlpha(0);
+
+                }
+                else
+                {
+                    txt.setText(update.getValue());
+                    img.setImageResource(R.drawable.right);
+                    img.setImageAlpha(255);
+                }
+            }
+            else if (update.getType().equals(UIDataType.BOT3SAYS))
+            {
+                txt = (TextView) findViewById(R.id.txtBotSays_3);
+                img = (ImageView) findViewById(R.id.imgBubble4);
+                if (update.getValue().equals("delete"))
+                {
+                    txt.setText("");
+                    img.setImageAlpha(0);
+
+                }
+                else
+                {
+                    txt.setText(update.getValue());
+                    img.setImageResource(R.drawable.up);
+                    img.setImageAlpha(255);
+                }
+            }
+            else if (update.getType().equals(UIDataType.PLAYERSAYS))
+            {
+                txt = (TextView) findViewById(R.id.txtPlayerSays);
+                img = (ImageView) findViewById(R.id.imgBubble1);
+                if (update.getValue().equals("delete"))
+                {
+                    txt.setText("");
+                    img.setImageAlpha(0);
+
+                }
+                else
+                {
+                    txt.setText(update.getValue());
+                    img.setImageResource(R.drawable.left);
+                    img.setImageAlpha(255);
+                }
+            }
+            else if (update.getType().equals(UIDataType.BOT1BELIEVES))
+            {
+                txt = (TextView) findViewById(R.id.txtPlayerSays);
+                img = (ImageView) findViewById(R.id.imgBubble1);
+                if (update.getValue().equals("delete"))
+                {
+                    txt.setText("");
+                    img.setImageAlpha(0);
+
+                }
+                else
+                {
+                    txt.setText(update.getValue());
+                    img.setImageResource(R.drawable.up);
+                    img.setImageAlpha(255);
+                }
+            }
+            else if (update.getType().equals(UIDataType.BOT2BELIEVES))
+            {
+                txt = (TextView) findViewById(R.id.txtBotSays_1);
+                img = (ImageView) findViewById(R.id.imgBubble2);
+                if (update.getValue().equals("delete"))
+                {
+                    txt.setText("");
+                    img.setImageAlpha(0);
+
+                }
+                else
+                {
+                    txt.setText(update.getValue());
+                    img.setImageResource(R.drawable.left);
+                    img.setImageAlpha(255);
+                }
+            }
+            else if (update.getType().equals(UIDataType.BOT3BELIEVES))
+            {
+                txt = (TextView) findViewById(R.id.txtBotSays_2);
+                img = (ImageView) findViewById(R.id.imgBubble3);
+                if (update.getValue().equals("delete"))
+                {
+                    txt.setText("");
+                    img.setImageAlpha(0);
+
+                }
+                else
+                {
+                    txt.setText(update.getValue());
+                    img.setImageResource(R.drawable.down);
+                    img.setImageAlpha(255);
+                }
+            }
+            else if (update.getType().equals(UIDataType.PLAYERBELIEVES))
+            {
+                txt = (TextView) findViewById(R.id.txtBotSays_3);
+                img = (ImageView) findViewById(R.id.imgBubble4);
+                if (update.getValue().equals("delete"))
+                {
+                    txt.setText("");
+                    img.setImageAlpha(0);
+
+                }
+                else
+                {
+                    txt.setText(update.getValue());
+                    img.setImageResource(R.drawable.left);
+                    img.setImageAlpha(255);
+                }
+            }
+            else if (update.getType().equals(UIDataType.BOT1POINTS))
+            {
+                txt = (TextView) findViewById(R.id.txtBotPoints_1);
+                txt.setText(update.getValue() + " pont");
+            }
+            else if (update.getType().equals(UIDataType.BOT2POINTS))
+            {
+                txt = (TextView) findViewById(R.id.txtBotPoints_2);
+                txt.setText(update.getValue() + " pont");
+            }
+            else if (update.getType().equals(UIDataType.BOT3POINTS))
+            {
+                txt = (TextView) findViewById(R.id.txtBotPoints_3);
+                txt.setText(update.getValue() + " pont");
+            }
+            else if (update.getType().equals(UIDataType.PLAYERPOINTS))
+            {
+                txt = (TextView) findViewById(R.id.txtPlayerPoints);
+                txt.setText(update.getValue() + " pont");
+            }
+            else if (update.getType().equals(UIDataType.TABLEPOINTS))
+            {
+                txt = (TextView) findViewById(R.id.txtTablePoints);
+                txt.setText(update.getValue() + " pont");
+            }
+            else if (update.getType().equals(UIDataType.ROUND))
+            {
+                txt = (TextView) findViewById(R.id.txtRound);
+                txt.setText(update.getValue() + ". kör");
+            }
+            else if (update.getType().equals(UIDataType.STATE_ROLL))
+            {
+                btnBelieve.setEnabled(false);
+                btnDontBelieve.setEnabled(false);
+                btnSay.setEnabled(false);
+                spinDie_1.setEnabled(false);
+                spinDie_2.setEnabled(false);
+                btnRoll.setEnabled(true);
+            }
+            else if (update.getType().equals(UIDataType.STATE_BELIEVE))
+            {
+                btnBelieve.setEnabled(true);
+                btnDontBelieve.setEnabled(true);
+                btnSay.setEnabled(false);
+                spinDie_1.setEnabled(false);
+                spinDie_2.setEnabled(false);
+                btnRoll.setEnabled(false);
+            }
+
         }
 
     }

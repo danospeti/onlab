@@ -235,11 +235,11 @@
             <ImageView
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:src="@drawable/user"
+                android:src="@drawable/bot"
 
                 />
             <TextView
-                android:text="Nev"
+                android:text="Bot Nev"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
