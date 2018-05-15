@@ -57,12 +57,12 @@ public class KamuActivity extends AppCompatActivity {
         txtBotName_2 = (TextView) findViewById(R.id.txtBotName_2);
         txtBotName_3 = (TextView) findViewById(R.id.txtBotName_3);
         txtBotDice_1 = (TextView) findViewById(R.id.txtBotPoints_1);
-        txtBotDice_1 = (TextView) findViewById(R.id.txtBotPoints_2);
-        txtBotDice_1 = (TextView) findViewById(R.id.txtBotPoints_3);
+        txtBotDice_2 = (TextView) findViewById(R.id.txtBotPoints_2);
+        txtBotDice_3 = (TextView) findViewById(R.id.txtBotPoints_3);
         txtRound = (TextView) findViewById(R.id.txtRound);
         txtBotSays_1 = (TextView) findViewById(R.id.txtBotSays_1);
-        txtBotSays_2 = (TextView) findViewById(R.id.txtBotSays_1);
-        txtBotSays_3 = (TextView) findViewById(R.id.txtBotSays_1);
+        txtBotSays_2 = (TextView) findViewById(R.id.txtBotSays_2);
+        txtBotSays_3 = (TextView) findViewById(R.id.txtBotSays_3);
         txtPlayerSays = (TextView) findViewById(R.id.txtPlayerSays);
         txtPlayerName = (TextView) findViewById(R.id.txtPlayerName);
         txtMessage = (TextView) findViewById(R.id.txtMessage);
@@ -83,7 +83,7 @@ public class KamuActivity extends AppCompatActivity {
         imgBubble4 = (ImageView) findViewById(R.id.imgBubble4);
 
         spinDie_1 = (Spinner) findViewById(R.id.spinDie_1);
-        spinDie_1 = (Spinner) findViewById(R.id.spinDie_2);
+        spinDie_2 = (Spinner) findViewById(R.id.spinDie_2);
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.numbers_array, android.R.layout.simple_spinner_item);
@@ -93,16 +93,37 @@ public class KamuActivity extends AppCompatActivity {
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinDie_1.setAdapter(adapter2);
         spinDie_2.setAdapter(adapter);
-
+        InitializeGameController();
         btnBelieve.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
-
+            new SleepThenWrite2().execute(new KamuUpdate(false, KamuUIDataType.STATE_SAY, ""));
             }});
         btnDontBelieve.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
-
+                if (player.getData().getRoll().SayIsTrue(player.getData().getPreviousSaid())) //igaz volt
+                {
+                    new SleepThenWrite2().execute(new KamuUpdate(false, KamuUIDataType.MESSAGE, "Van annyi kocka."));
+                    if (player.removeDie())
+                    {
+                        //kiesés;
+                    }
+                }
+                else //ha nem volt igaz
+                {
+                    new SleepThenWrite2().execute(new KamuUpdate(false, KamuUIDataType.MESSAGE, "Nincs annyi kocka."));
+                    new SleepThenWrite2().execute(new KamuUpdate(false, KamuUIDataType.PLAYERDICE,""));
+                    if (player.getData().getPreviousPlayer().removeDie())
+                    {
+                        //kiesés
+                    }
+                }
+                new SleepThenWrite2().execute(new KamuUpdate(true, KamuUIDataType.MESSAGE, ""));
+                new SleepThenWrite2().execute(new KamuUpdate(false, KamuUIDataType.BOT3SAYS, "delete")); //TODO ha kiesett ez nem jó
+                player.getData().setGuggolas(true);
+                gc.RollAll();
+                new SleepThenWrite2().execute(new KamuUpdate(false, KamuUIDataType.STATE_SAY, ""));
             }});
         btnSay.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,9 +132,13 @@ public class KamuActivity extends AppCompatActivity {
                 int sayNumber = Integer.parseInt((String)spinDie_2.getSelectedItem());
                 KamuRollable say = new KamuRollable(sayNumber, sayQuantity);
                 //TODO ellenőrzés, hogy van-e annyi
+                player.getOutData().setGuggolas(false);
+                player.getOutData().setPreviousPlayer(player);
+
                 if (player.getData().isGuggolas())
                 {
                     player.getOutData().setPreviousSaid(say);
+                    new SleepThenWrite2().execute(new KamuUpdate(false, KamuUIDataType.BOT3SAYS, "delete")); //TODO ha kiesett ez nem jó
                     EndTurn();
                 }
                 else if ( player.getData().getPreviousSaid().getQuantity()>= sayQuantity)
@@ -124,10 +149,12 @@ public class KamuActivity extends AppCompatActivity {
                 else
                 {
                     player.getOutData().setPreviousSaid(say);
+                    new SleepThenWrite2().execute(new KamuUpdate(false, KamuUIDataType.BOT3DICE,String.valueOf(player.getData().getPreviousPlayer().getDiceSize()))); //TODO ha kiesett ez már nem jó
+                    new SleepThenWrite2().execute(new KamuUpdate(false, KamuUIDataType.BOT3SAYS, "delete")); //TODO ha kiesett ez nem jó
+
                     EndTurn();
                 }
-                player.getOutData().setGuggolas(false);
-                player.getOutData().setPreviousPlayer(player);
+
             }});
     }
 
@@ -146,9 +173,9 @@ public class KamuActivity extends AppCompatActivity {
         txtBotName_3.setText(players.get(3).getName());
         txtPlayerName.setText(player.getName());
 
-        txtBotDice_1.setText(players.get(1).getDiceSize());
-        txtBotDice_1.setText(players.get(2).getDiceSize());
-        txtBotDice_1.setText(players.get(3).getDiceSize());
+        txtBotDice_1.setText(String.valueOf(players.get(1).getDiceSize())+ " kocka");
+        txtBotDice_2.setText(String.valueOf(players.get(2).getDiceSize())+ " kocka");
+        txtBotDice_3.setText(String.valueOf(players.get(3).getDiceSize())+ " kocka");
 
         txtPlayerSays.setText("");
         txtBotSays_1.setText("");
@@ -165,14 +192,59 @@ public class KamuActivity extends AppCompatActivity {
         KamuRoll roll = gc.RollAll();
         data.setRoll(roll);
         player.setData(data);
-
+        player.setOutData(new KamuTurnData());
+        player.getOutData().setRoll(roll);
+        SetPlayerDice();
         new SleepThenWrite2().execute(new KamuUpdate(false, KamuUIDataType.STATE_SAY,""));
     }
     private void EndTurn()
     {
+
         player.getOutData().setPreviousPlayer(player);
         player.setData(gc.PlayARound(player.getOutData()));
         new SleepThenWrite2().execute(new KamuUpdate(false, KamuUIDataType.STATE_WAIT, ""));
+        PlayUIUpdates();
+        new SleepThenWrite2().execute(new KamuUpdate(false, KamuUIDataType.STATE_BELIEVE, ""));
+
+    }
+    private void SetPlayerDice()
+    {
+        ArrayList<Integer> dice = player.getDice();
+        ArrayList<ImageView> IVDice = new ArrayList<ImageView>();
+        ArrayList<Integer> resources = new ArrayList<Integer>();
+        IVDice.add(imgDie_1);
+        IVDice.add(imgDie_2);
+        IVDice.add(imgDie_3);
+        IVDice.add(imgDie_4);
+        IVDice.add(imgDie_5);
+        resources.add(R.drawable.dice1);
+        resources.add(R.drawable.dice2);
+        resources.add(R.drawable.dice3);
+        resources.add(R.drawable.dice4);
+        resources.add(R.drawable.dice5);
+        resources.add(R.drawable.dice6);
+
+        for (int i = 0; i < 5 ; i++)
+        {
+            if (i < dice.size())
+            {
+                IVDice.get(i).setImageResource(resources.get(dice.get(i)-1));
+                IVDice.get(i).setImageAlpha(255);
+            }
+            else
+            {
+                IVDice.get(i).setImageAlpha(0);
+            }
+        }
+    }
+    private void PlayUIUpdates()
+    {
+        ArrayList<KamuUpdate> updates = gc.getUIUpdates();
+
+        for (KamuUpdate update: updates)
+        {
+            new SleepThenWrite2().execute(update);
+        }
     }
     private class SleepThenWrite2 extends AsyncTask<KamuUpdate, Void, KamuUpdate> {
         private TextView txt;
@@ -340,23 +412,21 @@ public class KamuActivity extends AppCompatActivity {
             else if (update.getType().equals(KamuUIDataType.BOT1DICE))
             {
                 txt = (TextView) findViewById(R.id.txtBotPoints_1);
-                txt.setText(update.getValue() + " pont");
+                txt.setText(update.getValue() + " kocka");
             }
             else if (update.getType().equals(KamuUIDataType.BOT2DICE))
             {
                 txt = (TextView) findViewById(R.id.txtBotPoints_2);
-                txt.setText(update.getValue() + " pont");
+                txt.setText(update.getValue() + " kocka");
             }
             else if (update.getType().equals(KamuUIDataType.BOT3DICE))
             {
                 txt = (TextView) findViewById(R.id.txtBotPoints_3);
-                txt.setText(update.getValue() + " pont");
+                txt.setText(update.getValue() + " kocka");
             }
             else if (update.getType().equals(KamuUIDataType.PLAYERDICE))
             {
-
-                txt = (TextView) findViewById(R.id.txtPlayerPoints);
-                txt.setText(update.getValue() + " pont");
+                SetPlayerDice();
             }
 
             else if (update.getType().equals(KamuUIDataType.ROUND))
@@ -390,6 +460,5 @@ public class KamuActivity extends AppCompatActivity {
                 spinDie_2.setEnabled(false);
             }
         }
-
     }
 }

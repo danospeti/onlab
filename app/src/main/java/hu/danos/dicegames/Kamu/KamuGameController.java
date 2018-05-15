@@ -91,6 +91,8 @@ public class KamuGameController {
 				roll.AddOne(dice.get(e));
 			}		
 		}
+		UpdateUI(players.get(0), KamuDataType.DICE, "");
+		UpdateUI(null, KamuDataType.MESSAGE, "Mindenki dobott.");
 		return roll;
 	}
 	public void UpdateUI(KamuPlayer p, KamuDataType type, String msg)

@@ -69,7 +69,7 @@ public class KamuPlayer {
 
 	public KamuTurnData Turn(KamuTurnData data)
 	{
-		System.out.println(name + " j�n");
+		System.out.println(name + " jön");
 		KamuTurnData outData = new KamuTurnData();
 		outData.setPreviousPlayer(this);
 		outData.setRoll(data.getRoll());
@@ -77,9 +77,8 @@ public class KamuPlayer {
 		if (data.isGuggolas())
 		{
 			ui.Guggolas();
-			
-			
 			outData.setPreviousSaid(ui.Say());
+			outData.setGuggolas(false);
 			gc.UpdateUI(this,KamuDataType.SAY, outData.getPreviousSaid().getString());
 			
 		}
@@ -110,7 +109,8 @@ public class KamuPlayer {
 					outData.setWinner(this);
 				}
 				outData.setGuggolas(true);
-			}
+                outData.setRoll(gc.RollAll());
+            }
 			else //az el�z� hazudott
 			{
 				gc.UpdateUI(this,KamuDataType.BELIEVE, "Nem hiszem el.");
@@ -120,7 +120,12 @@ public class KamuPlayer {
 					outData.setWinner(data.getPreviousPlayer()); //a winner az eliminated //elbaszas
 				}
 				outData.setGuggolas(true);
+                outData.setRoll(gc.RollAll());
 			}
+		}
+		if (outData.isGuggolas() /*TODO és nem esett ki*/)
+		{
+			outData = Turn(outData);
 		}
 		return outData;
 	}
