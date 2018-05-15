@@ -303,7 +303,8 @@ public class BazsActivity extends AppCompatActivity {
         BazsBotUI botUI2 = new BazsBotUI();
         BazsBotUI botUI3= new BazsBotUI();
 
-        BazsPlayer jatekos = new BazsPlayerAndroid("Berci",0);
+        String playerName = getIntent().getStringExtra("PLAYER_NAME");
+        BazsPlayer jatekos = new BazsPlayerAndroid(playerName,0);
         BazsPlayer bot = new BazsPlayer("Bot Ond",botUI,0);
         BazsPlayer bot2 = new BazsPlayer("Bot Kond",botUI2,0);
         BazsPlayer bot3 = new BazsPlayer("Bot Tas",botUI3,0);

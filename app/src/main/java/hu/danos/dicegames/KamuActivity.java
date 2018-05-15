@@ -1,4 +1,4 @@
-package hu.danos.dicegames.Kamu;
+package hu.danos.dicegames;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -13,7 +13,15 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import hu.danos.dicegames.R;
+import hu.danos.dicegames.Kamu.KamuBotUI;
+import hu.danos.dicegames.Kamu.KamuGameController;
+import hu.danos.dicegames.Kamu.KamuPlayer;
+import hu.danos.dicegames.Kamu.KamuPlayerAndroid;
+import hu.danos.dicegames.Kamu.KamuRoll;
+import hu.danos.dicegames.Kamu.KamuRollable;
+import hu.danos.dicegames.Kamu.KamuTurnData;
+import hu.danos.dicegames.Kamu.KamuUIDataType;
+import hu.danos.dicegames.Kamu.KamuUpdate;
 
 public class KamuActivity extends AppCompatActivity {
     private TextView txtBotName_1;
@@ -160,8 +168,9 @@ public class KamuActivity extends AppCompatActivity {
 
     private void InitializeGameController()
     {
+        String playerName = getIntent().getStringExtra("PLAYER_NAME");
         ArrayList<KamuPlayer> players = new  ArrayList<KamuPlayer>();
-        players.add(new KamuPlayerAndroid("Berci", null));
+        players.add(new KamuPlayerAndroid(playerName, null));
         players.add(new KamuPlayer("Bot Ond", new KamuBotUI()));
         players.add(new KamuPlayer("Bot Kond", new KamuBotUI()));
         players.add(new KamuPlayer("Bot Tas", new KamuBotUI()));

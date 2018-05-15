@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="10dp"
+    android:paddingLeft="32dp"
+    android:paddingRight="32dp"
+    android:paddingTop="10dp"
+    android:background="@drawable/background"
+
+    tools:context="hu.danos.dicegames.MainMenuActivity">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Új játék:"
+            android:gravity="center_horizontal"
+            style="@style/Base.TextAppearance.AppCompat"
+            android:paddingBottom="8dp"
+            />
+        <Button
+            android:text="Bázs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnBazs"
+            android:elevation="5dp" />
+        <Button
+            android:text="Kamu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnKamu"
+            android:elevation="5dp" />
+        <Button
+        android:text="Jutka"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnJutka"
+        android:elevation="5dp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="18dp"
+            android:paddingBottom="6dp"
+            android:text="Előző játék betöltése:"
+            android:gravity="center_horizontal"
+            style="@style/Base.TextAppearance.AppCompat"
+            android:id="@+id/txtLoad"/>
+        <Button
+            android:text="Jutka"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnLoad"
+            android:elevation="5dp" />
+
+    </LinearLayout>
+    <TextView
+        android:text="Kockajátékok"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:id="@+id/textView"
+        android:textSize="36sp"
+        android:textStyle="normal|bold" />
+</RelativeLayout>
