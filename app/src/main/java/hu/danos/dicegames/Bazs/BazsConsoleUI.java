@@ -1,4 +1,4 @@
-package Engine.Bazs;
+package hu.danos.dicegames.Bazs;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;

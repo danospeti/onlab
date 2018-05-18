@@ -13,14 +13,14 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import Engine.Bazs.BazsBotUI;
-import Engine.Bazs.BazsDice;
-import Engine.Bazs.BazsGameController;
-import Engine.Bazs.BazsPlayer;
-import Engine.Bazs.BazsPlayerAndroid;
-import Engine.Bazs.BazsRollable;
-import Engine.Bazs.BazsTurnData;
-import Engine.Bazs.UIDataType;
+import hu.danos.dicegames.Bazs.BazsBotUI;
+import hu.danos.dicegames.Bazs.BazsDice;
+import hu.danos.dicegames.Bazs.BazsGameController;
+import hu.danos.dicegames.Bazs.BazsPlayer;
+import hu.danos.dicegames.Bazs.BazsPlayerAndroid;
+import hu.danos.dicegames.Bazs.BazsRollable;
+import hu.danos.dicegames.Bazs.BazsTurnData;
+import hu.danos.dicegames.Bazs.UIDataType;
 import hu.danos.dicegames.Bazs.BazsUpdate;
 import hu.danos.dicegames.Bazs.TurnStage;
 

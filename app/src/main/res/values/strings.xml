@@ -1,3 +1,29 @@
 <resources>
-    <string name="app_name">DiceGames</string>
+    <string name="app_name">Kockajátékok</string>
+    <string name="setName">Valamilyen nevet meg kell adni!</string>
+    <string name="addAtleastOnePlayer">Legalább egy játékost a játékhoz kell adni!</string>
+    <string name="zeroPoints">0 pont</string>
+    <string name="getAtLeastOneDie">Legalább egy kockát ki kell venned!</string>
+    <string name="point">pont</string>
+    <string name="rollAtLeastOnce">Legalább egyszer dobnod kell!</string>
+    <string name="jutka">JUTKA! :D</string>
+    <string name="badRoll">Hát ez most sajnos nem jött össze.</string>
+    <string name="j_t_kos_hozz_ad_sa">Játékos hozzáadása:</string>
+    <string name="hozz_ad">Hozzáad</string>
+    <string name="k_sz">Kész</string>
+    <string name="n_v">Név</string>
+    <string name="j_j_t_k">Új játék</string>
+    <string name="bet_lt_s">Betöltés</string>
+    <string name="jutka_j_t_k">Jutka játék</string>
+    <string name="aktu_lis_j_t_kos">Aktuális játékos:</string>
+    <string name="pontok">Pontok:</string>
+    <string name="negat_v_sszeg">Negatívösszeg:</string>
+    <string name="k_r_pontjai">Kör pontjai:</string>
+    <string name="kock_k_az_asztalon">Kockák az asztalon:</string>
+    <string name="dob_s">Dobás</string>
+    <string name="kiveszem">Kiveszem</string>
+    <string name="meg_llok">MegÁllok</string>
+    <string name="kivett_kock_k">Kivett kockák:</string>
+    <string name="_0_k_r">1. kör</string>
+    <string name="kor">.kör</string>
 </resources>

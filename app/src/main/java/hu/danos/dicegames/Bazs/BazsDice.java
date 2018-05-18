@@ -1,4 +1,4 @@
-package Engine.Bazs;
+package hu.danos.dicegames.Bazs;
 import java.util.ArrayList;
 import java.util.Random;
 

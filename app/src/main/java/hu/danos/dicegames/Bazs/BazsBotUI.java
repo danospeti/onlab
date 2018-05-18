@@ -1,4 +1,4 @@
-package Engine.Bazs;
+package hu.danos.dicegames.Bazs;
 import java.util.Random;
 
 public class BazsBotUI implements BazsUIInterface{

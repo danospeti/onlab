@@ -1,4 +1,4 @@
-package Engine.Bazs;
+package hu.danos.dicegames.Bazs;
 
 public class BazsRollable {
 private int rollNumber;

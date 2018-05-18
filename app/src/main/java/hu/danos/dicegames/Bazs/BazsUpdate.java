@@ -1,7 +1,5 @@
 package hu.danos.dicegames.Bazs;
 
-import Engine.Bazs.UIDataType;
-
 /**
  * Created by danos on 2018. 05. 11..
  */

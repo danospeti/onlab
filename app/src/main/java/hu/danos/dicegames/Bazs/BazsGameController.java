@@ -1,7 +1,6 @@
-package Engine.Bazs;
+package hu.danos.dicegames.Bazs;
 import java.util.ArrayList;
 
-import hu.danos.dicegames.Bazs.BazsUpdate;
 import hu.danos.dicegames.BazsActivity;
 
 public class BazsGameController {

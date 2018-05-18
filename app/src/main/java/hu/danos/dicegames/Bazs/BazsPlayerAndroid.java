@@ -1,4 +1,4 @@
-package Engine.Bazs;
+package hu.danos.dicegames.Bazs;
 
 /**
  * Created by danos on 2018. 04. 30..

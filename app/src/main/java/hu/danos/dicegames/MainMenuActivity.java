@@ -38,6 +38,10 @@ public class MainMenuActivity extends AppCompatActivity {
         jutkaButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
+                Intent intent;
+                intent = new Intent(getBaseContext(), AddPlayerActivity.class);
+                startActivity(intent);
+                finish();
             }});
         loadButton.setOnClickListener(new View.OnClickListener() {
             @Override

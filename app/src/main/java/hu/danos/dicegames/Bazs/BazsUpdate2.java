@@ -1,9 +1,5 @@
 package hu.danos.dicegames.Bazs;
 
-import Engine.Bazs.BazsGameController;
-import Engine.Bazs.BazsPlayer;
-import Engine.Bazs.DataType;
-
 /**
  * Created by danos on 2018. 05. 03..
  */
