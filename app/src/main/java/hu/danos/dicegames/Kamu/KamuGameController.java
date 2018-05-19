@@ -42,7 +42,7 @@ public class KamuGameController {
 				//i helyre�ll�t�s
 				players.remove(data.getWinner());
 			}
-			if (data.isGuggolas()) //ha kiesett valaki lehet hogy rossz j�t�kost h�v meg
+			if (data.isGuggolas())
 			{
 				data.setRoll(RollAll());
 				data = players.get(i).Turn(data);

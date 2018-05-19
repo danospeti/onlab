@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:background="@drawable/background"
     tools:context="hu.danos.dicegames.KamuActivity"
+    android:orientation="vertical"
     >
     <TableRow
         android:layout_width="fill_parent"
@@ -36,8 +37,7 @@
                     android:layout_margin="1dp"
                     android:gravity="center"
                     android:text="Hello"
-                    android:textColor="#000000"
-                    android:textSize="12sp"/>
+                    android:textColor="#000000" />
             </RelativeLayout>
         </FrameLayout>
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -392,12 +392,20 @@
                 android:orientation="horizontal"
                 android:layout_weight="0.5"
                 android:gravity="center">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Szerintem van"/>
                 <Spinner
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.75"
                     android:id="@+id/spinDie_1"
                     />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="db"/>
                 <Spinner
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"

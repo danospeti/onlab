@@ -9,18 +9,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainMenuActivity">
+        <activity android:name=".MainMenuActivity" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".BazsActivity" />
-        <activity android:name=".KamuActivity" />
-        <activity android:name=".PlayerNameActivity" />
-        <activity android:name=".JutkaActivity"></activity>
-        <activity android:name=".AddPlayerActivity"></activity>
+        <activity android:name=".BazsActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".KamuActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".PlayerNameActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".JutkaActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".AddPlayerActivity" android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

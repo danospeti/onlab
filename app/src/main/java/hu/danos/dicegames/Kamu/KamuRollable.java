@@ -33,7 +33,7 @@ public class KamuRollable {
 
 	public String getString()
 	{
-		String toReturn = "Szerintem van " + String.valueOf(this.quantity) + "db ";
+		String toReturn = "Szerintem van\n" + String.valueOf(this.quantity) + "db ";
 		if (rollNumber == 1) toReturn += "egyes";
 		else if (rollNumber == 2) toReturn += "kettes";
 		else if (rollNumber == 3) toReturn += "hármas";
