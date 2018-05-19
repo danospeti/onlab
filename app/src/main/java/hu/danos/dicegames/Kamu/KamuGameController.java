@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class KamuGameController {
 
 	private ArrayList<KamuPlayer> players = new ArrayList<KamuPlayer>();
-
+	private boolean playerlost = false;
 	public ArrayList<KamuUpdate> getUIUpdates() {
 		ArrayList<KamuUpdate> temp = (ArrayList<KamuUpdate>) uIUpdates.clone();
 		uIUpdates.clear();
@@ -145,7 +145,30 @@ public class KamuGameController {
 				update.setType(KamuUIDataType.BOT3BELIEVES);
 			update2 = new KamuUpdate(true, update.getType(), "delete");
 		}
-		uIUpdates.add(update);
+		if (type == KamuDataType.ELIMINATED)
+		{
+			update.setWait(false);
+			update.setValue(msg);
+			if (players.indexOf(p) == 1)
+				update.setType(KamuUIDataType.BOT1ELIMINATED);
+			else if (players.indexOf(p) == 2)
+				update.setType(KamuUIDataType.BOT2ELIMINATED);
+			else if (players.indexOf(p) == 3)
+				update.setType(KamuUIDataType.BOT3ELIMINATED);
+			else
+			{
+				update.setType(KamuUIDataType.PLAYERLOSES);
+
+			}
+			if (players.get(1).isEliminated() && players.get(2).isEliminated() && players.get(1).isEliminated())
+			{
+				update2 = new KamuUpdate(true, KamuUIDataType.PLAYERWINS, "");
+				playerlost = true;
+				uIUpdates.add(update);
+			}
+		}
+		if (!playerlost)
+			uIUpdates.add(update);
 		if (update2 != null)
 			uIUpdates.add(update2);
 	}

@@ -20,9 +20,9 @@ import hu.danos.dicegames.Bazs.BazsPlayer;
 import hu.danos.dicegames.Bazs.BazsPlayerAndroid;
 import hu.danos.dicegames.Bazs.BazsRollable;
 import hu.danos.dicegames.Bazs.BazsTurnData;
-import hu.danos.dicegames.Bazs.UIDataType;
 import hu.danos.dicegames.Bazs.BazsUpdate;
 import hu.danos.dicegames.Bazs.TurnStage;
+import hu.danos.dicegames.Bazs.UIDataType;
 
 public class BazsActivity extends AppCompatActivity {
     private TextView txtBotName_1;
@@ -132,11 +132,8 @@ public class BazsActivity extends AppCompatActivity {
                     }
                     else //ha b�ntet�pont visszatev�s van
                     {
-                        //TODO nyertˇˇ
-                        /*
-                        if(data.getPlayer().RemovePenaltyPoint())
-                            outData.setWinner(data.getPlayer());
-                            */
+                        if(player.getData().getPlayer().RemovePenaltyPoint())
+                            player.getOutData().setWinner(player.getData().getPlayer());
                         gc.AddPenaltyPoint();
                     }
                 }
@@ -152,11 +149,9 @@ public class BazsActivity extends AppCompatActivity {
                     }
                     else //ha b�ntet�pont visszatev�s van
                     {
-                        //TODO nyertˇˇ
-                        /*
-                        if (RemovePenaltyPoint()) // nyertes be�ll�t�sa ha nyert
-                            outData.setWinner(this);
-                            */
+                        if (player.RemovePenaltyPoint()) // nyertes be�ll�t�sa ha nyert
+                            player.getOutData().setWinner(player);
+
                         gc.AddPenaltyPoint();
                     }
                 }
@@ -234,7 +229,7 @@ public class BazsActivity extends AppCompatActivity {
                         if (!gc.getPenaltyReverse())
                         {
                             player.AddPenaltyPoint();
-                            //TODO ez így kurvára nem állapotˇˇ
+                            //TODO ez így jó?
                             txtPlayerPoints.setText(String.valueOf(player.getPenaltyPoints()));
                             gc.RemovePenaltyPoint();
                         }
@@ -267,7 +262,16 @@ public class BazsActivity extends AppCompatActivity {
     {
         if (player.getOutData().getWinner() != null)
         {
-            //TODO nyertél
+            String message = "";
+            if (player.getOutData().getWinner().getName().equals(player.getName()))
+            {
+                message = "Te nyertél!";
+            }
+            else
+            {
+                message = player.getOutData().getWinner().getName() + " nyert, a játéknak vége.";
+            }
+            new SleepThenWrite2().execute(new BazsUpdate(false, UIDataType.WON, message));
         }
         else
         {
@@ -283,7 +287,6 @@ public class BazsActivity extends AppCompatActivity {
             }
             else
             {
-                //TODO if 21
                 if (player.getData().getRoll().getRollNumber() == 21)
                 {
                     //new SleepThenWrite().execute("setTurnState:ROLL");
@@ -402,87 +405,6 @@ public class BazsActivity extends AppCompatActivity {
             new SleepThenWrite2().execute(update);
             //System.out.println(update);
         }
-    }
-    private class SleepThenWrite extends AsyncTask<String, Void, String> {
-        private TextView txt;
-        @Override
-        protected String doInBackground(String... params) {
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
-            return params[0];
-        }
-        protected void onPostExecute(String update) {
-            //txt = (TextView) findViewById(R.id.label);
-            //txt.setText(result); // txt.setText(result);
-            String[] splitUpdate = update.split(":");
-            if (splitUpdate[0].equals("msg"))
-            {
-                txt = (TextView) findViewById(R.id.txtMessage);
-                txt.setText(splitUpdate[1]);
-            }
-            if (splitUpdate[0].equals("tpts"))
-            {
-                txt = (TextView) findViewById(R.id.txtTablePoints);
-                txt.setText(splitUpdate[1]);
-            }
-            if (splitUpdate[0].equals("bot1say"))
-            {
-                txt = (TextView) findViewById(R.id.txtBotSays_1);
-                txt.setText(splitUpdate[1]);
-            }
-            if (splitUpdate[0].equals("bot2say"))
-            {
-                txt = (TextView) findViewById(R.id.txtBotSays_2);
-                txt.setText(splitUpdate[1]);
-            }
-            if (splitUpdate[0].equals("bot3say"))
-            {
-                txt = (TextView) findViewById(R.id.txtBotSays_3);
-                txt.setText(splitUpdate[1]);
-            }
-            if (splitUpdate[0].equals("bot1pts"))
-            {
-                txt = (TextView) findViewById(R.id.txtBotPoints_1);
-                txt.setText(splitUpdate[1]);
-            }
-            if (splitUpdate[0].equals("bot2pts"))
-            {
-                txt = (TextView) findViewById(R.id.txtBotPoints_2);
-                txt.setText(splitUpdate[1]);
-            }
-            if (splitUpdate[0].equals("bot3pts"))
-            {
-                txt = (TextView) findViewById(R.id.txtBotPoints_3);
-                txt.setText(splitUpdate[1]);
-            }
-            if (splitUpdate[0].equals("setTurnState"))
-            {
-                if (splitUpdate[1].equals("ROLL"))
-                {
-                    btnBelieve.setEnabled(false);
-                    btnDontBelieve.setEnabled(false);
-                    btnSay.setEnabled(false);
-                    spinDie_1.setEnabled(false);
-                    spinDie_2.setEnabled(false);
-                    btnRoll.setEnabled(true);
-                }
-                else if (splitUpdate[1].equals("BELIEVE"))
-                {
-                    btnBelieve.setEnabled(true);
-                    btnDontBelieve.setEnabled(true);
-                    btnSay.setEnabled(false);
-                    spinDie_1.setEnabled(false);
-                    spinDie_2.setEnabled(false);
-                    btnRoll.setEnabled(false);
-                }
-
-            }
-        }
-
     }
 
     private class SleepThenWrite2 extends AsyncTask<BazsUpdate, Void, BazsUpdate> {
@@ -691,6 +613,17 @@ public class BazsActivity extends AppCompatActivity {
             {
                 btnBelieve.setEnabled(true);
                 btnDontBelieve.setEnabled(true);
+                btnSay.setEnabled(false);
+                spinDie_1.setEnabled(false);
+                spinDie_2.setEnabled(false);
+                btnRoll.setEnabled(false);
+            }
+            else if (update.getType().equals(UIDataType.WON))
+            {
+                txt = (TextView) findViewById(R.id.txtMessage);
+                txt.setText(update.getValue());
+                btnBelieve.setEnabled(false);
+                btnDontBelieve.setEnabled(false);
                 btnSay.setEnabled(false);
                 spinDie_1.setEnabled(false);
                 spinDie_2.setEnabled(false);

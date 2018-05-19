@@ -115,16 +115,23 @@ public class KamuActivity extends AppCompatActivity {
                     new SleepThenWrite2().execute(new KamuUpdate(false, KamuUIDataType.MESSAGE, "Van annyi kocka."));
                     if (player.removeDie())
                     {
-                        //kiesés;
+                        txtMessage.setText("Kiestél, a játéknak vége.");
+                        btnBelieve.setEnabled(false);
+                        btnDontBelieve.setEnabled(false);
+                        btnSay.setEnabled(false);
+                        spinDie_1.setEnabled(false);
+                        spinDie_2.setEnabled(false);
                     }
                 }
                 else //ha nem volt igaz
                 {
                     new SleepThenWrite2().execute(new KamuUpdate(false, KamuUIDataType.MESSAGE, "Nincs annyi kocka."));
                     new SleepThenWrite2().execute(new KamuUpdate(false, KamuUIDataType.PLAYERDICE,""));
+                    gc.getUIUpdates();
                     if (player.getData().getPreviousPlayer().removeDie())
                     {
                         //kiesés
+                        PlayUIUpdates();
                     }
                 }
                 new SleepThenWrite2().execute(new KamuUpdate(true, KamuUIDataType.MESSAGE, ""));
@@ -417,6 +424,41 @@ public class KamuActivity extends AppCompatActivity {
                     img.setImageResource(R.drawable.left);
                     img.setImageAlpha(255);
                 }
+            }
+            else if (update.getType().equals(KamuUIDataType.BOT1ELIMINATED))
+            {
+                txt = (TextView) findViewById(R.id.txtBotName_1);
+                txt.setText(txt.getText().toString() + " (kiesett)");
+            }
+            else if (update.getType().equals(KamuUIDataType.BOT2ELIMINATED))
+            {
+                txt = (TextView) findViewById(R.id.txtBotName_2);
+                txt.setText(txt.getText().toString() + " (kiesett)");
+            }
+            else if (update.getType().equals(KamuUIDataType.BOT3ELIMINATED))
+            {
+                txt = (TextView) findViewById(R.id.txtBotName_3);
+                txt.setText(txt.getText().toString() + " (kiesett)");
+            }
+            else if (update.getType().equals(KamuUIDataType.PLAYERWINS))
+            {
+                txt = (TextView) findViewById(R.id.txtMessage);
+                txt.setText("Nyertél!");
+                btnBelieve.setEnabled(false);
+                btnDontBelieve.setEnabled(false);
+                btnSay.setEnabled(false);
+                spinDie_1.setEnabled(false);
+                spinDie_2.setEnabled(false);
+            }
+            else if (update.getType().equals(KamuUIDataType.PLAYERLOSES))
+            {
+                txt = (TextView) findViewById(R.id.txtMessage);
+                txt.setText("Kiestél! A játéknak vége.");
+                btnBelieve.setEnabled(false);
+                btnDontBelieve.setEnabled(false);
+                btnSay.setEnabled(false);
+                spinDie_1.setEnabled(false);
+                spinDie_2.setEnabled(false);
             }
             else if (update.getType().equals(KamuUIDataType.BOT1DICE))
             {

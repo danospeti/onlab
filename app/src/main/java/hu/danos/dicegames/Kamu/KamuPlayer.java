@@ -60,8 +60,13 @@ public class KamuPlayer {
 	}
 	public boolean removeDie() //returns true if player has 0 dice
 	{
-		if (dice.size() == 0)
+		if (dice.size() == 1) {
+			eliminated = true;
+			gc.UpdateUI(this,KamuDataType.ELIMINATED, "");
+			gc.UpdateUI(this,KamuDataType.MESSAGE, name + " kiesett.");
+			gc.UpdateUI(this,KamuDataType.DICE, String.valueOf(getDiceSize()));
 			return true;
+		}
 		dice.remove(dice.size()-1);
 		gc.UpdateUI(this,KamuDataType.DICE, String.valueOf(getDiceSize()));
 		return dice.size() <=0;

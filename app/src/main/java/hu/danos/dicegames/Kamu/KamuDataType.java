@@ -5,5 +5,5 @@ package hu.danos.dicegames.Kamu;
  */
 
 public enum KamuDataType {
-    MESSAGE, ROUND, DICE, SAY, BELIEVE
+    MESSAGE, ROUND, DICE, SAY, BELIEVE, ELIMINATED
 }

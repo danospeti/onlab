@@ -88,42 +88,14 @@ public void RemovePenaltyPoint()
             if (data.getWinner()!=null)
                 break;
         }
+		if (data.getWinner()!=null)
+				UpdateUI(data.getWinner(),DataType.WON, "");
         return data;
     }
 	public void UpdateUI(BazsPlayer p, DataType type, String msg)
 	{
 
-		// kimenet type:msg
-		//types: msg, botXsay, botXpts, tpts
-		//TODO playerpoints updateelése
-		/*
-		String toAdd = "";
-		if (type == DataType.MESSAGE)
-		{
-			toAdd+="msg";
-		}
-		if (type == DataType.SAY)
-		{
-			toAdd +="bot";
-			toAdd += String.valueOf(players.indexOf(p));
-			toAdd +="say";
 
-		}
-		if (type == DataType.POINTS)
-		{
-			toAdd +="bot";
-			toAdd += String.valueOf(players.indexOf(p));
-			toAdd +="pts";
-		}
-		if (type == DataType.TABLEPOINTS)
-		{
-			toAdd+="tpts";
-		}
-
-		toAdd +=":";
-		toAdd +=msg;
-		uIUpdates.add(toAdd);
-		*/
 		BazsUpdate update = new BazsUpdate();
 		BazsUpdate update2 = null;
 		if (type == DataType.MESSAGE)
@@ -177,7 +149,19 @@ public void RemovePenaltyPoint()
 				update.setType(UIDataType.BOT2BELIEVES);
 			else if (players.indexOf(p) == 3)
 				update.setType(UIDataType.BOT3BELIEVES);
-			update2 = new BazsUpdate(true, update.getType(), "delete");
+			update2 = new BazsUpdate(true, update.getType(), "delete");//VP-BTA
+		}
+		if (type == DataType.WON)
+		{
+			update.setWait(false);
+			update.setType(UIDataType.WON);
+			if (players.indexOf(p) == 0) {
+				update.setValue("Te nyertél!");
+			}
+			else
+			{
+				update.setValue(p.getName() + " nyert. A játéknak vége.");
+			}
 		}
 		uIUpdates.add(update);
 		if (update2 != null)

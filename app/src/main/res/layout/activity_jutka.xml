@@ -3,334 +3,340 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="16dp"
-    android:orientation="vertical"
+    android:background="@drawable/background"
     tools:context="hu.danos.dicegames.JutkaActivity">
-    <TextView
-        android:text="@string/_0_k_r"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="0dp"
-        android:id="@+id/roundNumberLabel"
-        android:textAlignment="center" />
-    <TextView
-        android:text="@string/aktu_lis_j_t_kos"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="4dp"
-        android:id="@+id/textView3"
-        android:textAlignment="center" />
-
-    <TextView
-        android:text="Lajos"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="0dp"
-        android:id="@+id/nameLabel"
-        android:textSize="30sp"
-        android:layout_centerHorizontal="true"
-        android:textAlignment="center" />
-    <TextView
-        android:id="@+id/txtAllPoints"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="12dp"
-        android:text="@string/pontok" />
-    <TextView
-        android:text="1000 pont"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="0dp"
-        android:id="@+id/scoreLabel"
-        android:textSize="26sp"
-        android:layout_below="@+id/textView5"
-        android:layout_centerHorizontal="true"
-        android:textAlignment="center"
-        android:textColor="@color/colorPrimaryDark" />
-    <ProgressBar
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="0dp"
-        android:id="@+id/progressBar"
-        android:layout_below="@+id/scoreLabel"
-        android:max="3"
-        android:progress="1" />
-
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:layout_margin="16dp"
+        android:orientation="vertical">
+        <TextView
+            android:text="@string/_0_k_r"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="0dp"
+            android:id="@+id/roundNumberLabel"
+            android:textAlignment="center" />
+        <TextView
+            android:text="@string/aktu_lis_j_t_kos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="4dp"
+            android:id="@+id/textView3"
+            android:textAlignment="center" />
 
         <TextView
-            android:text="@string/negat_v_sszeg"
-            android:layout_width="wrap_content"
+            android:text="Lajos"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/textView8"
-            android:layout_centerVertical="true"
-            android:layout_weight="1" />
-
+            android:layout_marginTop="0dp"
+            android:id="@+id/nameLabel"
+            android:textSize="30sp"
+            android:layout_centerHorizontal="true"
+            android:textAlignment="center" />
         <TextView
-            android:text="200"
+            android:id="@+id/txtAllPoints"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/textView8"
-
-            android:id="@+id/negativeCount"
-            android:layout_weight="1"
-            android:textAlignment="textEnd"
-            android:textColor="@color/colorAccent" />
-
-    </LinearLayout>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="16dp"
-        android:text="@string/k_r_pontjai" />
-    <TextView
-
-        android:text="1000 pont"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="0dp"
-        android:id="@+id/txtRoundPoints"
-        android:textSize="24sp"
-        android:layout_below="@+id/textView5"
-        android:layout_centerHorizontal="true"
-        android:textAlignment="center"
-        android:textColor="@color/colorPrimaryDark" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="4dp"
-        android:text="@string/kock_k_az_asztalon" />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="0dp"
-        android:weightSum="6"
-        android:orientation="horizontal">
-
-        <FrameLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
-        <ImageButton
-            android:id="@+id/btnDice1"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
             android:layout_gravity="center"
-            android:padding="0dp"
-            android:alpha="1"
-            android:scaleType="centerInside"
-            android:src="@drawable/dice1" />
-        </FrameLayout>
-
-        <FrameLayout
-            android:layout_width="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="@string/pontok" />
+        <TextView
+            android:text="1000 pont"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1">
-        <ImageButton
-            android:id="@+id/btnDice2"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_gravity="center"
-            android:padding="0dp"
-            android:scaleType="centerInside"
-            android:src="@drawable/dice1" />
-        </FrameLayout>
-
-        <FrameLayout
-            android:layout_width="wrap_content"
+            android:layout_marginTop="0dp"
+            android:id="@+id/scoreLabel"
+            android:textSize="26sp"
+            android:layout_below="@+id/textView5"
+            android:layout_centerHorizontal="true"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimaryDark" />
+        <ProgressBar
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1">
-        <ImageButton
-            android:id="@+id/btnDice3"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_gravity="center"
-            android:padding="0dp"
-            android:scaleType="centerInside"
-            android:src="@drawable/dice1" />
-        </FrameLayout>
+            android:layout_marginTop="0dp"
+            android:id="@+id/progressBar"
+            android:layout_below="@+id/scoreLabel"
+            android:max="3"
+            android:progress="1" />
 
-        <FrameLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
-        <ImageButton
-            android:id="@+id/btnDice4"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_gravity="center"
-            android:padding="0dp"
-            android:scaleType="centerInside"
-            android:src="@drawable/dice1" />
-        </FrameLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <FrameLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
-        <ImageButton
-            android:id="@+id/btnDice5"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_gravity="center"
-            android:padding="0dp"
-            android:scaleType="centerInside"
-            android:src="@drawable/dice1" />
-        </FrameLayout>
-        <FrameLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
-        <ImageButton
-            android:id="@+id/btnDice6"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_gravity="center"
-            android:padding="0dp"
-            android:scaleType="centerInside"
-            android:src="@drawable/dice1" />
-        </FrameLayout>
+            <TextView
+                android:text="@string/negat_v_sszeg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView8"
+                android:layout_centerVertical="true"
+                android:layout_weight="1" />
 
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="0dp"
-        android:weightSum="3"
-        android:orientation="horizontal">
-    <Button
-        android:id="@+id/btnDobas"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_weight="1"
-        android:text="@string/dob_s" />
-    <Button
-        android:id="@+id/btnKeep"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_weight="1"
-        android:text="@string/kiveszem" />
-    <Button
-        android:id="@+id/btnPassz"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_weight="1"
-        android:text="@string/meg_llok" />
+            <TextView
+                android:text="200"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/textView8"
+
+                android:id="@+id/negativeCount"
+                android:layout_weight="1"
+                android:textAlignment="textEnd"
+                android:textColor="@color/colorAccent" />
+
         </LinearLayout>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="4dp"
-        android:text="@string/kivett_kock_k" />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="0dp"
-        android:weightSum="6"
-        android:orientation="horizontal">
-
-        <FrameLayout
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1">
-            <ImageButton
-                android:id="@+id/btnDiceHand1"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_gravity="center"
-                android:padding="0dp"
-                android:alpha="1"
-                android:scaleType="centerInside"
-                android:src="@drawable/dice1" />
-        </FrameLayout>
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:text="@string/k_r_pontjai" />
+        <TextView
 
-        <FrameLayout
+            android:text="1000 pont"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            android:id="@+id/txtRoundPoints"
+            android:textSize="24sp"
+            android:layout_below="@+id/textView5"
+            android:layout_centerHorizontal="true"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimaryDark" />
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1">
-            <ImageButton
-                android:id="@+id/btnDiceHand2"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_gravity="center"
-                android:padding="0dp"
-                android:scaleType="centerInside"
-                android:src="@drawable/dice1" />
-        </FrameLayout>
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="4dp"
+            android:text="@string/kock_k_az_asztalon" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp"
+            android:weightSum="6"
+            android:orientation="horizontal">
 
-        <FrameLayout
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+                <ImageButton
+                    android:id="@+id/btnDice1"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:padding="0dp"
+                    android:alpha="1"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/dice1" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+                <ImageButton
+                    android:id="@+id/btnDice2"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:padding="0dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/dice1" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+                <ImageButton
+                    android:id="@+id/btnDice3"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:padding="0dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/dice1" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+                <ImageButton
+                    android:id="@+id/btnDice4"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:padding="0dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/dice1" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+                <ImageButton
+                    android:id="@+id/btnDice5"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:padding="0dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/dice1" />
+            </FrameLayout>
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+                <ImageButton
+                    android:id="@+id/btnDice6"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:padding="0dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/dice1" />
+            </FrameLayout>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp"
+            android:weightSum="3"
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/btnDobas"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:text="@string/dob_s" />
+            <Button
+                android:id="@+id/btnKeep"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:text="@string/kiveszem" />
+            <Button
+                android:id="@+id/btnPassz"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:text="@string/meg_llok" />
+        </LinearLayout>
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1">
-            <ImageButton
-                android:id="@+id/btnDiceHand3"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_gravity="center"
-                android:padding="0dp"
-                android:scaleType="centerInside"
-                android:src="@drawable/dice1" />
-        </FrameLayout>
-
-        <FrameLayout
-            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="4dp"
+            android:text="@string/kivett_kock_k" />
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1">
-            <ImageButton
-                android:id="@+id/btnDiceHand4"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_gravity="center"
-                android:padding="0dp"
-                android:scaleType="centerInside"
-                android:src="@drawable/dice1" />
-        </FrameLayout>
+            android:layout_margin="0dp"
+            android:weightSum="6"
+            android:orientation="horizontal">
 
-        <FrameLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
-            <ImageButton
-                android:id="@+id/btnDiceHand5"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_gravity="center"
-                android:padding="0dp"
-                android:scaleType="centerInside"
-                android:src="@drawable/dice1" />
-        </FrameLayout>
-        <FrameLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
-            <ImageButton
-                android:id="@+id/btnDiceHand6"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_gravity="center"
-                android:padding="0dp"
-                android:scaleType="centerInside"
-                android:src="@drawable/dice1" />
-        </FrameLayout>
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+                <ImageButton
+                    android:id="@+id/btnDiceHand1"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:padding="0dp"
+                    android:alpha="1"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/dice1" />
+            </FrameLayout>
 
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+                <ImageButton
+                    android:id="@+id/btnDiceHand2"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:padding="0dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/dice1" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+                <ImageButton
+                    android:id="@+id/btnDiceHand3"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:padding="0dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/dice1" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+                <ImageButton
+                    android:id="@+id/btnDiceHand4"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:padding="0dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/dice1" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+                <ImageButton
+                    android:id="@+id/btnDiceHand5"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:padding="0dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/dice1" />
+            </FrameLayout>
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+                <ImageButton
+                    android:id="@+id/btnDiceHand6"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:padding="0dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/dice1" />
+            </FrameLayout>
+
+        </LinearLayout>
     </LinearLayout>
+
 
 </LinearLayout>
