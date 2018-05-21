@@ -15,7 +15,7 @@ public class MainMenuActivity extends AppCompatActivity {
         final Button bazsButton = (Button)findViewById(R.id.btnBazs);
         final Button kamuButton = (Button)findViewById(R.id.btnKamu);
         final Button jutkaButton = (Button)findViewById(R.id.btnJutka);
-        final Button loadButton = (Button)findViewById(R.id.btnLoad);
+        getSupportActionBar().setTitle("");
 
         bazsButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,10 +42,6 @@ public class MainMenuActivity extends AppCompatActivity {
                 intent = new Intent(getBaseContext(), AddPlayerActivity.class);
                 startActivity(intent);
                 finish();
-            }});
-        loadButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(final View view) {
             }});
     }
 

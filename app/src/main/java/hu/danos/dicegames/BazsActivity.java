@@ -230,7 +230,7 @@ public class BazsActivity extends AppCompatActivity {
                         {
                             player.AddPenaltyPoint();
                             //TODO ez így jó?
-                            txtPlayerPoints.setText(String.valueOf(player.getPenaltyPoints()));
+                            txtPlayerPoints.setText(String.valueOf(player.getPenaltyPoints()) + " pont");
                             gc.RemovePenaltyPoint();
                         }
                         else
@@ -331,6 +331,7 @@ public class BazsActivity extends AppCompatActivity {
         txtBotPoints_3.setText( "0 pont");
         txtPlayerPoints.setText( "0 pont");
         txtTablePoints.setText(String.valueOf(tablepoints) + " pont");
+        txtMessage.setText("");
 
         txtPlayerSays.setText("");
         txtBotSays_1.setText("");

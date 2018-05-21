@@ -128,7 +128,7 @@ public class KamuPlayer {
                 outData.setRoll(gc.RollAll());
 			}
 		}
-		if (outData.isGuggolas() /*TODO és nem esett ki*/)
+		if (outData.isGuggolas())
 		{
 			outData = Turn(outData);
 		}

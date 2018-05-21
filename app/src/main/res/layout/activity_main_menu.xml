@@ -44,21 +44,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/btnJutka"
         android:elevation="5dp" />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="18dp"
-            android:paddingBottom="6dp"
-            android:text="Előző játék betöltése:"
-            android:gravity="center_horizontal"
-            style="@style/Base.TextAppearance.AppCompat"
-            android:id="@+id/txtLoad"/>
-        <Button
-            android:text="Jutka"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/btnLoad"
-            android:elevation="5dp" />
+
 
     </LinearLayout>
     <TextView

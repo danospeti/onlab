@@ -188,6 +188,7 @@ public class KamuActivity extends AppCompatActivity {
         txtBotName_2.setText(players.get(2).getName());
         txtBotName_3.setText(players.get(3).getName());
         txtPlayerName.setText(player.getName());
+        txtMessage.setText("");
 
         txtBotDice_1.setText(String.valueOf(players.get(1).getDiceSize())+ " kocka");
         txtBotDice_2.setText(String.valueOf(players.get(2).getDiceSize())+ " kocka");
@@ -269,7 +270,7 @@ public class KamuActivity extends AppCompatActivity {
         protected KamuUpdate doInBackground(KamuUpdate... params) {
             if (params[0].isWait()) {
                 try {
-                    Thread.sleep(2000);
+                    Thread.sleep(4000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
